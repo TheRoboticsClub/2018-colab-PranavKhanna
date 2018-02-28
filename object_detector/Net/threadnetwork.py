@@ -1,9 +1,3 @@
-#
-# Created on Jan 26, 2017
-#
-# @author: naxvm
-#
-
 import time
 import threading
 from datetime import datetime

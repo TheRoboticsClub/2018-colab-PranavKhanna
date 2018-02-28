@@ -30,6 +30,8 @@ class Camera(object):
                 print(str(self.im_height)+" "+str(self.im_width))
             else:
                 print("No camera interface is connected")
+                exit()
+
         except:
             traceback.print_exc()
             exit()

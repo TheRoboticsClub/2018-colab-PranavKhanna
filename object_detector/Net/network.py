@@ -34,7 +34,6 @@ class Detection_Network(object):
 		label_map = label_map_util.load_labelmap(PATH_TO_LABELS) # loads the labels map.
 		categories = label_map_util.convert_label_map_to_categories(label_map, max_num_classes=NUM_CLASSES)
 		self.category_index = label_map_util.create_category_index(categories)
-		print(self.category_index)
 
 		detection_graph=tf.Graph()
 		with detection_graph.as_default():
