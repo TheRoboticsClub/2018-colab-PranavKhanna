@@ -57,10 +57,14 @@ class Detection_Network(object):
 		self.output_image=None
 	
 	def predict(self):
-		image=self.input_image
-		if image is not None:
+		image_np=self.input_image
+		
+		if image_np is not None:
+			image_np.setflags(write=1)
+			
+			image_np_expanded = np.expand_dims(image_np, axis=0)
 			sess=self.sess
-			boxes,detection_scores,detection_classes,num_detections=sess.run([self.detection_boxes,self.detection_scores,self.detection_classes,self.num_detections],feed_dict={image_tensor:image})
+			detection_boxes,detection_scores,detection_classes,num_detections=sess.run([self.detection_boxes,self.detection_scores,self.detection_classes,self.num_detections],feed_dict={self.image_tensor:image_np_expanded})
 			# visualization of the results.
 			vis_util.visualize_boxes_and_labels_on_image_array(
 				image_np,
@@ -70,7 +74,9 @@ class Detection_Network(object):
 				self.category_index,
 				use_normalized_coordinates=True,
 				line_thickness=8)
-		self.output_image=image
+		else:
+			image_np = np.zeros((360, 240), dtype=np.int32)
+		self.output_image=image_np
 	
 
 

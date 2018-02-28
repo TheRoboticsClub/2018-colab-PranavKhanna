@@ -38,8 +38,8 @@ class Camera(object):
         if self.cam:
             self.lock.acquire()
             im = np.zeros((self.im_height,self.im_width,3),dtype=np.uint8)
-            im = np.frombuffer(self.im.data,dtype=uint8)
-            im = np.resize(im,(self.im_height,self.im_width,3))
+            im = np.frombuffer(self.im.data,dtype=np.uint8)
+            im = np.reshape(im,(self.im_height,self.im_width,3))
             self.lock.release()
 
             return im
