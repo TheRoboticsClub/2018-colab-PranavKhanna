@@ -23,26 +23,26 @@ class GUI(QtWidgets.QWidget):
             
         QtWidgets.QWidget.__init__(self, parent)
         self.setWindowTitle("JdeRobot-TensorFlow detector")
-        self.resize(1000, 600)
-        self.move(150, 50)
+        self.resize(1800, 1200)
+        self.move(450, 150)
         self.setWindowIcon(QtGui.QIcon('resources/jderobot.png'))
         self.updGUI.connect(self.update)
 
         # Original image label.
         self.im_label = QtWidgets.QLabel(self)
-        self.im_label.resize(450, 350)
-        self.im_label.move(25, 90)
+        self.im_label.resize(800, 600)
+        self.im_label.move(50, 100)
         self.im_label.show()
 
         # Predicted image label.
         self.im_pred_label = QtWidgets.QLabel(self)
-        self.im_pred_label.resize(450, 350)
-        self.im_pred_label.move(525, 90)
+        self.im_pred_label.resize(800, 600)
+        self.im_pred_label.move(950,100)
         self.im_pred_label.show()
 
         # Button for configuring detection flow
         button = QtWidgets.QPushButton(self)
-        button.move(450, 500)   
+        button.move(850, 800)   
         button.setText('Toggle\nDetection')
         button.clicked.connect(self.toggleNetwork)
     
