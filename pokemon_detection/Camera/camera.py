@@ -10,24 +10,19 @@ import tensorflow as tf
 from Net.network import Detection_Network
 import config
 import comm 
-import argparse
+
 
 class Camera(object):
 
     def __init__(self):
-        parser = argparse.ArgumentParser(description='Pokemon Detector')
-        parser.add_argument('--cfg_file', type=str)
-        args = parser.parse_args()
-        
         try:
-        	cfg=config.load(args.cfg_file)
-
+            cfg = config.load(sys.argv[1])
         except IndexError:
-            raise SystemExit('Missing YML file. Usage: python2 objectdetector.py objectdetector.yml')
+            raise SystemExit('Missing YML file. Usage: python2 pokemondetector.py pokemondetector.yml')
         self.lock = threading.Lock()
         try:
-            jdrc = comm.init(cfg,'ObjectDetector')
-            self.cam=jdrc.getCameraClient('ObjectDetector.Camera')
+            jdrc = comm.init(cfg,'PokemonDetector')
+            self.cam=jdrc.getCameraClient('PokemonDetector.Camera')
             if(self.cam.hasproxy()):
                 self.im = self.cam.getImage()
                 self.im_height = self.im.height
