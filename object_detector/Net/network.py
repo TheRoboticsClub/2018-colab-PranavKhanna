@@ -19,16 +19,16 @@ class Detection_Network(object):
 
 	def __init__(self):
 
-		MODEL_NAME = 'Net/' + 'ssd_mobilenet_v1_coco_2017_11_17'
+		MODEL_NAME = '/home/pranav/PycharmProjects/pokedex/training'
 		# the class is called from the root dir of the project!
 		MODEL_FILE = MODEL_NAME + '.tar.gz'
 
 		# path to the frozen graph (inside the model).
- 		PATH_TO_CKPT = MODEL_NAME + '/frozen_inference_graph.pb'
+ 		PATH_TO_CKPT = MODEL_NAME + '/pikachu.pb'
 
 
 		# path to the labels (id-name association).
-		PATH_TO_LABELS = os.path.join('Net/data', 'mscoco_label_map.pbtxt')
+		PATH_TO_LABELS = os.path.join('/home/pranav/PycharmProjects/pokedex/', 'pickachu.pbtxt')
 		NUM_CLASSES = 90
 
 		label_map = label_map_util.load_labelmap(PATH_TO_LABELS) # loads the labels map.
@@ -42,6 +42,7 @@ class Detection_Network(object):
 				serialized_graph = fid.read()
 				od_graph_def.ParseFromString(serialized_graph)
 				tf.import_graph_def(od_graph_def, name='')
+		
 
 		self.sess = tf.Session(graph=detection_graph)
 		self.image_tensor = detection_graph.get_tensor_by_name('image_tensor:0')
@@ -52,7 +53,6 @@ class Detection_Network(object):
 		print("Network Created")
         
 		self.input_image=None
-		print(self.input_image)
 		self.output_image=None
 	
 	def predict(self):
@@ -72,7 +72,7 @@ class Detection_Network(object):
 				np.squeeze(detection_scores),
 				self.category_index,
 				use_normalized_coordinates=True,
-				line_thickness=8)
+				line_thickness=12)
 		else:
 			image_np = np.zeros((360, 240), dtype=np.int32)
 		self.output_image=image_np
